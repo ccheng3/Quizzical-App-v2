@@ -9,6 +9,6 @@ Consists of a simple trivia 5-question panel of 'medium' difficulty general mult
 
 The data is fetched from the Open Trivia Database API.
 
-Conclusion: Gained a ton of experience with using modern React fundamentals (props, the useState and useEffect React hooks, modern functional component-based React.js app design). Most importantly, learned the hard way that the software design is orders of magnitude more difficult to implement than the actual implementation of the code. 
+Conclusion: Gained a ton of experience with using modern React fundamentals (props, the useState and useEffect React hooks, modern functional component-based React.js app design). Most importantly, learned the hard way that the software design is orders of magnitude more difficult to put forth than the actual implementation of the code. 
 
 Total time to project completion is about 10 days, around 7 hours a day on weekends and 1.5 hours a day on weekdays.
