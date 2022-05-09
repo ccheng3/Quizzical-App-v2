@@ -1,0 +1,17 @@
+.question-h2 {
+   color: #293264;
+   font-family: 'Karla';
+   font-style: normal;
+   font-weight: 700;
+   margin-bottom: 15px;
+}
+
+.questions-panel {
+   padding: 0px 75px;
+   display: block;
+}
+
+.question-hr {
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
