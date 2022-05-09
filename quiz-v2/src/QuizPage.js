@@ -101,7 +101,15 @@ export default function QuizPage() {
    function startNewMatch() {
       // you want to toggle isStartNewMatch so that React.useEffect() can
       // notice the change in state (True to False / False to True) and will 
-      // trigger another fetch() call for a new trivia questions panel. 
+      // trigger another fetch() call for a new trivia questions panel.
+
+      // this was the reason that the 3rd trivia round was not displaying - 
+      // you set isStartNewMatch from F to T for the 2nd round, and then
+      // set it from T to T for the 3rd round (T to T is not a state change 
+      // so useEffect did not fetch a new set of trivia questions)
+      //
+      // Conclusion: This was one hell of a 'gotcha' that really had me digging
+      // in my head for how useEffect's dependency array works. 
       setIsStartNewMatch(prevIsStartNewMatch => !prevIsStartNewMatch);
       setIsCheckAnswers(false);
       setNumCorrect(0);
