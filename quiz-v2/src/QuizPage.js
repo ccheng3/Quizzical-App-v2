@@ -20,13 +20,23 @@ export default function QuizPage() {
 
          setTriviaQuestions(data.results);
          setTriviaQuestions(data.results.map(question => {
+            let answersArray = [{ answer: question.correct_answer, id: nanoid(), key: nanoid(), isClicked: false },
+            { answer: question.incorrect_answers[0], id: nanoid(), key: nanoid(), isClicked: false },
+            { answer: question.incorrect_answers[1], id: nanoid(), key: nanoid(), isClicked: false },
+            { answer: question.incorrect_answers[2], id: nanoid(), key: nanoid(), isClicked: false },];
+            const shuffleArray = array => {
+               for (let i = array.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  const temp = array[i];
+                  array[i] = array[j];
+                  array[j] = temp;
+               }
+            }
+            // shuffleArray(answersArray);
             return {
                ...question,
                id: nanoid(),
-               answers: [{ answer: question.correct_answer, id: nanoid(), key: nanoid(), isClicked: false },
-               { answer: question.incorrect_answers[0], id: nanoid(), key: nanoid(), isClicked: false },
-               { answer: question.incorrect_answers[1], id: nanoid(), key: nanoid(), isClicked: false },
-               { answer: question.incorrect_answers[2], id: nanoid(), key: nanoid(), isClicked: false },]
+               answers: answersArray,
             }
          }))
       };
