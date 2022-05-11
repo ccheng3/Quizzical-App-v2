@@ -14,9 +14,13 @@ export default function AnswerChoice(props) {
 
    function renderAnswerChoice() {
       if (props.choice) {
-         // {props.isCheckAnswers ? !props.isClicked ? `fade-out` : props.isCorrectAnswer ? `correct-answer-chosen` : `wrong-answer-chosen` : props.isClicked ? `answerchoice-btn-clicked` : `answerchoice-btn-unclicked`}
+         // The onClick ternary conditional was the last piece to the puzzle!
+         //
+         // When the user checks the answers, the AnswerChoices will ignore the click events (hence the null)
+         // Otherwise, the user does not want to check the answers yet and so the AnswerChoices should
+         // respond to the user's choice selection/switch to a different answer. 
          return <span className={props.isCheckAnswers ? !props.isClicked ? `fade-out` : props.isCorrectAnswer ? `correct-answer-chosen` : `wrong-answer-chosen` : props.isClicked ? `answerchoice-btn-clicked` : `answerchoice-btn-unclicked`}
-            onClick={() => { props.handleAnswerClick(props.answerID, props.questionID) }}>
+            onClick={props.isCheckAnswers ? null : () => { props.handleAnswerClick(props.answerID, props.questionID) }}>
             {props.choice.split(/\&.+?\;/g)}
          </span>
       }
