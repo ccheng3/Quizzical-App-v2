@@ -33,7 +33,7 @@ export default function QuizPage() {
                   array[j] = temp;
                }
             }
-            // shuffleArray(answersArray);
+            shuffleArray(answersArray);
             return {
                ...question,
                id: nanoid(),
