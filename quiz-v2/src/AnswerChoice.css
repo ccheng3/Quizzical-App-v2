@@ -18,15 +18,18 @@
    background-color: #D6DBF5;
 }
 
-/* 
-j .fade-out {
+.fade-out {
    border: 2px solid grey;
+   opacity: 0.5;
 }
 
 .correct-answer-chosen {
-   border: 2px solid greenyellow;
+   background-color: #94D7A2;
+   border: none;
 }
 
 .wrong-answer-chosen {
-   border: 2px solid red;
-} */
+   background-color: #F8BCBC;
+   opacity: 0.5;
+   border: none;
+}

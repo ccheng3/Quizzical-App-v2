@@ -116,7 +116,7 @@ export default function QuizPage() {
          return prevTriviaQuestions.map(question => {
             return {
                ...question, answers: question.answers.map(answer => {
-                  return { ...answer, isClicked: false, isCheckAnswers: true };
+                  return { ...answer, isCheckAnswers: true };
                })
             }
          })
