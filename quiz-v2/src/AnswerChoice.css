@@ -1,5 +1,8 @@
 .answerchoice-btn-unclicked,
-.answerchoice-btn-clicked {
+.answerchoice-btn-clicked,
+.correct-answer-chosen,
+.wrong-answer-chosen,
+.fade-out {
    border: 1px solid #4D5B9E;
    border-radius: 8px;
    font-family: 'Inter';
@@ -14,3 +17,16 @@
 .answerchoice-btn-clicked {
    background-color: #D6DBF5;
 }
+
+/* 
+j .fade-out {
+   border: 2px solid grey;
+}
+
+.correct-answer-chosen {
+   border: 2px solid greenyellow;
+}
+
+.wrong-answer-chosen {
+   border: 2px solid red;
+} */

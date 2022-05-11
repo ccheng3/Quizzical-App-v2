@@ -14,7 +14,8 @@ export default function AnswerChoice(props) {
 
    function renderAnswerChoice() {
       if (props.choice) {
-         return <span className={props.isClicked ? `answerchoice-btn-clicked` : `answerchoice-btn-unclicked`}
+         // {props.isCheckAnswers ? !props.isClicked ? `fade-out` : props.isCorrectAnswer ? `correct-answer-chosen` : `wrong-answer-chosen` : props.isClicked ? `answerchoice-btn-clicked` : `answerchoice-btn-unclicked`}
+         return <span className={props.isCheckAnswers ? !props.isClicked ? `fade-out` : props.isCorrectAnswer ? `correct-answer-chosen` : `wrong-answer-chosen` : props.isClicked ? `answerchoice-btn-clicked` : `answerchoice-btn-unclicked`}
             onClick={() => { props.handleAnswerClick(props.answerID, props.questionID) }}>
             {props.choice.split(/\&.+?\;/g)}
          </span>

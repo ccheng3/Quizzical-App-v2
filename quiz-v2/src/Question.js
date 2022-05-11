@@ -12,6 +12,8 @@ export default function Question(props) {
                key={nanoid()}
                choice={answer.answer}
                isClicked={answer.isClicked}
+               isCorrectAnswer={answer.isCorrectAnswer}
+               isCheckAnswers={answer.isCheckAnswers}
                handleAnswerClick={props.handleAnswerClick}
                questionID={props.questionID}
                answerID={answer.id} />

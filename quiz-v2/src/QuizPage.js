@@ -20,10 +20,11 @@ export default function QuizPage() {
 
          setTriviaQuestions(data.results);
          setTriviaQuestions(data.results.map(question => {
-            let answersArray = [{ answer: question.correct_answer, id: nanoid(), key: nanoid(), isClicked: false },
-            { answer: question.incorrect_answers[0], id: nanoid(), key: nanoid(), isClicked: false },
-            { answer: question.incorrect_answers[1], id: nanoid(), key: nanoid(), isClicked: false },
-            { answer: question.incorrect_answers[2], id: nanoid(), key: nanoid(), isClicked: false },];
+            let answersArray = [
+               { answer: question.correct_answer, id: nanoid(), key: nanoid(), isClicked: false, isCorrectAnswer: true, isCheckAnswers: isCheckAnswers },
+               { answer: question.incorrect_answers[0], id: nanoid(), key: nanoid(), isClicked: false, isCorrectAnswer: false, isCheckAnswers: isCheckAnswers },
+               { answer: question.incorrect_answers[1], id: nanoid(), key: nanoid(), isClicked: false, isCorrectAnswer: false, isCheckAnswers: isCheckAnswers },
+               { answer: question.incorrect_answers[2], id: nanoid(), key: nanoid(), isClicked: false, isCorrectAnswer: false, isCheckAnswers: isCheckAnswers },];
             const shuffleArray = array => {
                for (let i = array.length - 1; i > 0; i--) {
                   const j = Math.floor(Math.random() * (i + 1));
@@ -102,9 +103,24 @@ export default function QuizPage() {
          }
       }
       setNumCorrect(numCorrectAnswers);
-      setIsCheckAnswers(prevIsCheckAnswers => !prevIsCheckAnswers);
-      // return `You scored ${numCorrectAnswers} correct answers`;
-      // return `You scored ${numCorrectAnswers} correct answers`;
+      // now you need to make sure that isCheckAnswers is true BOTH in QuizPage
+      // and also in each AnswerChoice
+      // why for QuizPage? ---> need to conditionally change quiz btn's text/functionality (QuizPage Line 144)
+      // why for each AnswerChoice? ---> need to update each AnswerChoice's style to reflect the 
+      // correct answer and the incorrect answers. 
+      // User chose the correct answer? ---> That answer is styled green highlight
+      // User chose the wrong answer? ---> That answer is styled red and correct answer is styled green.
+      // All unchosen answers? ---> These are faded out for hierarchical UI effect 
+      setIsCheckAnswers(true);
+      setTriviaQuestions(prevTriviaQuestions => {
+         return prevTriviaQuestions.map(question => {
+            return {
+               ...question, answers: question.answers.map(answer => {
+                  return { ...answer, isClicked: false, isCheckAnswers: true };
+               })
+            }
+         })
+      })
    }
 
    // reset the game and start a new trivia round.
@@ -120,9 +136,30 @@ export default function QuizPage() {
       //
       // Conclusion: This was one hell of a 'gotcha' that really had me digging
       // in my head for how useEffect's dependency array works. 
-      setIsStartNewMatch(prevIsStartNewMatch => !prevIsStartNewMatch);
-      setIsCheckAnswers(false);
       setNumCorrect(0);
+      setIsCheckAnswers(false);
+      setTriviaQuestions(prevTriviaQuestions => {
+         return prevTriviaQuestions.map(question => {
+            return {
+               ...question, answers: question.answers.map(answer => {
+                  return { ...answer, isClicked: false, isCheckAnswers: isCheckAnswers };
+               })
+            }
+         })
+      })
+      // ...I found the error ---> was a logical error, so the program didn't break but 
+      // unexpected results occurred. 
+      // Reason: Plain and simple, I put this line before all of the data resets 
+      // As a result, this toggle call on isStartNewMatch was calling React.useEffect BEFORE
+      // all of the data resets, resulting in the "isChecked: true" state in all of the 
+      // AnswerChoice components. (This dropped all AnswerChoice styling after the 1st quiz round)
+      // 
+      // The error was literally hiding in plain sight, I was just contemplating at a lower
+      // level when the problem manifested at a higher, more general level. 
+      //
+      // "Is this code not producing the result I want" vs. "These lines of code aren't placed in 
+      // the correct order" 
+      setIsStartNewMatch(prevIsStartNewMatch => !prevIsStartNewMatch);
    }
 
    return (
