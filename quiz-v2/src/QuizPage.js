@@ -45,7 +45,6 @@ export default function QuizPage() {
    }, [isStartNewMatch]);
 
    function handleAnswerChoiceClicked(answerID, questionID) {
-      // console.log(`Question ID is: ${questionID}\nAnswerChoice ID is: ${answerID}`);
       setTriviaQuestions(prevTriviaQuestions => {
          return prevTriviaQuestions.map(question => {
             if (question.id === questionID) {
@@ -69,13 +68,10 @@ export default function QuizPage() {
       })
    }
 
-   // React.useEffect(() => console.log(triviaQuestions), [triviaQuestions]);
    function renderQuestions() {
       // render the Questions after the dataset has been loaded
       if (triviaQuestions) {
          return triviaQuestions.map(question => {
-            // return <div>{question.question.split(/\&.+?\;/g)}</div>
-            // console.log(question.answers)
             return <Question
                question={question.question}
                key={nanoid()}

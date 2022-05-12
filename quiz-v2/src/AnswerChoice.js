@@ -8,10 +8,6 @@ export default function AnswerChoice(props) {
    // focusing on implementing core app logic. Will return afterwards...
    // Documented well by Shripadk's 2014 guide
    // https://shripadk.github.io/react/docs/jsx-gotchas.html
-   function handleUserClick() {
-      props.onUserClick(props.id);
-   }
-
    function renderAnswerChoice() {
       if (props.choice) {
          // The onClick ternary conditional was the last piece to the puzzle!
